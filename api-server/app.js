@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT||8000;
-
 const { Client } = require('pg');
-const { send } = require('process');
-const connectionString = 'postgresql://postgres:docker@127.0.0.1:5432/WorldCup2022'
+// const { send } = require('process');
+
+const config = require('./config')[process.env.NODE_ENV||"dev"];
+const PORT = config.port;
+
 const client = new Client({
-  connectionString: connectionString
+  connectionString: config.connectionString
 });
+
 client.connect(err => {
   if (err) {
     console.error('connection error', err.stack)
@@ -18,10 +20,10 @@ client.connect(err => {
 
 app.use(express.json());
 
-app.get('/matches',(req,res)=>{
-  client.query('SELECT * FROM matches')
+app.get('/firstmatches',(req,res)=>{
+  client.query('SELECT * FROM firstmatches')
   .then(result=>{
-    result.send(result.rows);
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -29,7 +31,7 @@ app.get('/matches',(req,res)=>{
 app.get('/teams',(req,res)=>{
   client.query('SELECT * FROM teams')
   .then(result=>{
-    result.send(result.rows);
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -37,7 +39,7 @@ app.get('/teams',(req,res)=>{
 app.get('/venues',(req,res)=>{
   client.query('SELECT * FROM venues')
   .then(result=>{
-    result.send(result.rows);
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
