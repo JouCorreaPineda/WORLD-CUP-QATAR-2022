@@ -21,7 +21,7 @@ client.connect(err => {
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-  console.log('ARGENTINA WORLD CUP CHAMPIONS 2022 LES GOOOO!!')
+  res.send('ARGENTINA WORLD CUP CHAMPIONS 2022 LES GOOOO!!')
 });
 
 app.get('/firstmatches',(req,res)=>{
