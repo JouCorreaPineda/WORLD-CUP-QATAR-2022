@@ -20,6 +20,10 @@ client.connect(err => {
 
 app.use(express.json());
 
+app.get('/',(req,res)=>{
+  console.log('ARGENTINA WORLD CUP CHAMPIONS 2022 LES GOOOO!!')
+});
+
 app.get('/firstmatches',(req,res)=>{
   client.query('SELECT * FROM firstmatches')
   .then(result=>{

@@ -6,3 +6,7 @@ module.exports = {
   production:{connectionStrings: process.env.POSTGRES_CONNECTION_STRING + '?ssl=true',
       port: process.env.PORT}
 }
+
+//QUESTIONS:
+//Why dev and production if im only using production?
+//why ?ssl=true after process.env.POSTGRES_CONNECTION_STRING?
