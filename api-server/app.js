@@ -4,10 +4,10 @@ const { Client } = require('pg');
 // const { send } = require('process');
 
 const config = require('./config')[process.env.NODE_ENV||"dev"];
-const PORT = config.port;
+const port = config.port;
 
 const client = new Client({
-  connectionString: config.connectionString
+  connectionString: config.connectionStrings
 });
 
 client.connect(err => {
