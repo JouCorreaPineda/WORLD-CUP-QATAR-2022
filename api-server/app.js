@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const { Client } = require('pg');
 // const { send } = require('process');
 
@@ -18,6 +19,7 @@ client.connect(err => {
   }
 });
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/',(req,res)=>{
@@ -25,7 +27,7 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/firstmatches',(req,res)=>{
-  client.query('SELECT * FROM firstmatches')
+  client.query('SELECT * FROM firstMatches')
   .then(result=>{
     res.send(result.rows);
   })
