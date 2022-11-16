@@ -43,7 +43,7 @@ fetch(`${ApiUrl}`+'/teams')
       });
   });
 
-  fetch(`${ApiUrl}`+'/predictions')
+  fetch(`${ApiUrl}/predictions`)
   .then(response => response.json())
   .then(data => {
       data.forEach(element => {
@@ -72,7 +72,7 @@ fetch(`${ApiUrl}`+'/teams')
     const inputName = document.getElementById("inputName").value;
     const inputTeam = document.getElementById("inputTeam").value;
 
-    fetch(`${apiUrl}/predictions`, {
+    fetch(`${ApiUrl}/predictions`, {
       method: "POST",
       body: JSON.stringify({
           'name': inputName,
