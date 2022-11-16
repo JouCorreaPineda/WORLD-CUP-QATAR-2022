@@ -63,8 +63,8 @@ app.post('/predictions',(req,res)=>{
   let name = predictions.name;
   let team = predictions.team;
 
-  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}" RETURNING *)`)
-  .then(result=>{res.send(champion)})
+  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}"`)
+  .then(result=>{res.send(predictions)})
   .catch(e=>{console.error(e.stack)});
 });
 

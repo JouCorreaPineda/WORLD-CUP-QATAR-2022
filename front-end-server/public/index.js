@@ -72,35 +72,33 @@ fetch(`${ApiUrl}`+'/teams')
     const inputName = document.getElementById("inputName").value;
     const inputTeam = document.getElementById("inputTeam").value;
 
-    fetch(`${apiUrl}'/predictions`, {
+    fetch(`${apiUrl}/predictions`, {
       method: "POST",
       body: JSON.stringify({
-          name: inputName ,
-          team: inputTeam,
+          'name': inputName,
+          'team': inputTeam
       }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
+      headers: {"Content-type": "application/json" }
     })
-    .then(response=> response.json())
+    .then(response => {response.json()})
     .then(data=>
       data.forEach(element =>{
         
-        var predicitionRow = document.createElement('div');
+        var predictionRow = document.createElement('div');
         predictionRow.classList.add("predictionRow");
 
         var name = document.createElement('div');
         name.innerHTML = `${inputName}`;
-        predicitionRow.appendChild(name);
+        predictionRow.appendChild(name);
 
         var prediction = document.createElement('div');
         prediction.innerHTML = `${inputTeam}`;
-        predicitionRow.appendChild(prediction);
+        predictionRow.appendChild(prediction);
 
         const predictionRowContainer = document.querySelector("#predictionRowContainer");
         predictionRowContainer.appendChild(predictionRow);
       })
     )
     .catch(error => console.error('Error:', error)); 
- });
+  });
   
