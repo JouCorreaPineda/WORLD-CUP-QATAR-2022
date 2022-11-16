@@ -49,19 +49,21 @@ fetch(`${ApiUrl}`+'/teams')
   .then(response => response.json())
   .then(data => {
       data.forEach(element => {
-        var predicitonRow = document.createElement('div');
-        predicitonRow.classList.add("predictionRow");
+        var predictionRow = document.createElement('div');
+        predictionRow.classList.add("predictionRow");
   
         var name = document.createElement('div');
+        name.classList.add("name")
         name.innerHTML = element.name;
-        predicitonRow.appendChild(name);
+        predictionRow.appendChild(name);
   
         var prediction = document.createElement('div');
+        prediction.classList.add("prediction")
         prediction.innerHTML = element.prediction;
-        predicitonRow.appendChild(prediction);
+        predictionRow.appendChild(prediction);
 
         const predictionRowContainer = document.querySelector("#predictionRowContainer");
-        predictionRowContainer.appendChild(predicitonRow);
+        predictionRowContainer.appendChild(predictionRow);
        });
   });
 
@@ -81,21 +83,26 @@ fetch(`${ApiUrl}`+'/teams')
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
-    });
+      })
+    .then(response=> response.json())
+    .then(data=>
+      data.forEach(element=>{
+        
+        var predicitionRow = document.createElement('div');
+        predictionRow.classList.add("predictionRow");
 
-    // var predicitonRow = document.createElement('div');
-    // predicitonRow.classList.add("predictionRow");
+        var name = document.createElement('div');
+        name.innerHTML = inputName;
+        predicitionRow.appendChild(name);
 
-    // var name = document.createElement('div');
-    // name.innerHTML = inputName;
-    // predicitonRow.appendChild(name);
+        var prediction = document.createElement('div');
+        prediction.innerHTML = inputTeam;
+        predicitionRow.appendChild(prediction);
 
-    // var prediction = document.createElement('div');
-    // prediction.innerHTML = inputTeam;
-    // predicitonRow.appendChild(prediction);
-
-    // const predictionRowContainer = document.querySelector("#predictionRowContainer");
-    // predictionRowContainer.appendChild(predicitonRow);
-});
-   
+        const predictionRowContainer = document.querySelector("#predictionRowContainer");
+        predictionRowContainer.appendChild(predictionRow);
+      )
+    )
+    .catch(error => console.error('Error:', error)); 
+ });
   

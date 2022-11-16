@@ -1,12 +1,22 @@
+body {
+background-image: url("https://images.wallpapersden.com/image/download/2022-fifa-world-cup-hd-trophy_bWdrZWeUmZqaraWkpJRmbmdlrWZnbWU.jpg");
+}
+
 #submitals{
   margin: 10px;
 }
 
 .predictionRow{
-  display: block;
+  display: grid;
+  grid-template-columns: 50px 50px;
+}
+
+.prediction{
+
 }
 
 .name {
+  display: inline-block;
   border-color:black black;
   height: 30px;
   width: 80px;

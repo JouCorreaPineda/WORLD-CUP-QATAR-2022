@@ -68,6 +68,15 @@ app.post('/Submittals',(req,res)=>{
   .catch(e=>{console.error(e.stack)});
 });
 
+app.delete('/:id', (req,res)=>{
+  client.query(`DELETE FROM predictions WHERE id=${req.params.id}`)
+  .then(result=>{
+    res.send(result.rows)})
+   .catch(e=>{
+    console.error(e.stack)
+   })
+});
+
 
 
 app.listen(port,()=>{
