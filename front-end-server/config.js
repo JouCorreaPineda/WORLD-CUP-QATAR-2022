@@ -1,5 +1,5 @@
 module.export = {
-  dev:{apiUrl: 'http://localhost:', 
+  dev:{apiURL: 'http://localhost:', 
     port: 3000},
   production:{apiURL: process.env.API_URL, 
     port:process.env.PORT}

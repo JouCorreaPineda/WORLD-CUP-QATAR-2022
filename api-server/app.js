@@ -50,6 +50,26 @@ app.get('/venues',(req,res)=>{
   .catch(e=> console.error(e.stack));
 });
 
+app.get('/predictions',(req,res)=>{
+  client.query('SELECT * FROM predictions')
+  .then(result=>{
+    res.send(result.rows);
+  })
+  .catch(e=> console.error(e.stack));
+});
+
+app.post('/Submittals',(req,res)=>{
+  let predictions = req.body;
+  let name = predictions.name;
+  let team = predictions.team;
+
+  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}" RETURNING *)`)
+  .then(result=>{res.send(champion)})
+  .catch(e=>{console.error(e.stack)});
+});
+
+
+
 app.listen(port,()=>{
   console.log(`listening on port: ${port}`)
 });

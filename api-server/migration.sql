@@ -25,4 +25,10 @@ CREATE TABLE firstMatches(
   date date
 );
 
+CREATE TABLE predictions(
+  id serial,
+  name varchar,
+  team varchar
+);
+
 

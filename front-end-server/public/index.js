@@ -44,3 +44,58 @@ fetch(`${ApiUrl}`+'/teams')
         });
       });
   });
+
+  fetch(`${ApiUrl}`+'/predictions')
+  .then(response => response.json())
+  .then(data => {
+      data.forEach(element => {
+        var predicitonRow = document.createElement('div');
+        predicitonRow.classList.add("predictionRow");
+  
+        var name = document.createElement('div');
+        name.innerHTML = element.name;
+        predicitonRow.appendChild(name);
+  
+        var prediction = document.createElement('div');
+        prediction.innerHTML = element.prediction;
+        predicitonRow.appendChild(prediction);
+
+        const predictionRowContainer = document.querySelector("#predictionRowContainer");
+        predictionRowContainer.appendChild(predicitonRow);
+       });
+  });
+
+
+
+  const submitButton = document.querySelector("#submit-button");
+  submitButton.addEventListener('click',()=>{
+    const inputName = document.querySelector("#inputName").value;
+    const inputTeam = document.querySelector("#inputTeam").value;
+
+    fetch(`${apiUrl}`+'/submittals', {
+      method: "POST",
+      body: JSON.stringify({
+          name: inputName ,
+          team: inputTeam,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+
+    // var predicitonRow = document.createElement('div');
+    // predicitonRow.classList.add("predictionRow");
+
+    // var name = document.createElement('div');
+    // name.innerHTML = inputName;
+    // predicitonRow.appendChild(name);
+
+    // var prediction = document.createElement('div');
+    // prediction.innerHTML = inputTeam;
+    // predicitonRow.appendChild(prediction);
+
+    // const predictionRowContainer = document.querySelector("#predictionRowContainer");
+    // predictionRowContainer.appendChild(predicitonRow);
+});
+   
+  

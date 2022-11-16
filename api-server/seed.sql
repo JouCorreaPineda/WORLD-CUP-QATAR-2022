@@ -60,5 +60,6 @@ INSERT INTO firstMatches (venue,homeTeam,awayTeam,date) VALUES ('Al Janoub Stadi
 INSERT INTO firstMatches (venue,homeTeam,awayTeam,date) VALUES ('Education City','Denmark','Tunisia','2022-11-22');
 INSERT INTO firstMatches (venue,homeTeam,awayTeam,date) VALUES ('974 Stadium','Mexico','Poland','2022-11-22');
 
+--champions--
 
-
+INSERT INTO predictions (name,team) VALUES ('Jou Correa','Argentina');

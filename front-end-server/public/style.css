@@ -1,0 +1,13 @@
+#submitals{
+  margin: 10px;
+}
+
+.predictionRow{
+  display: block;
+}
+
+.name {
+  border-color:black black;
+  height: 30px;
+  width: 80px;
+}
