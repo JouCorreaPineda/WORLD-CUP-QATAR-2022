@@ -4,8 +4,6 @@ const ENV = "production";
 let ApiUrl = ENV == "dev" ? "http://localhost:3001" : "https://wc22-api-server.onrender.com";
 console.log("API:", ApiUrl);
 
-// var classList = document.getElementById("class-list");
-
 fetch(`${ApiUrl}`+'/venues')
   .then(response => response.json())
   .then(data => {
@@ -69,12 +67,12 @@ fetch(`${ApiUrl}`+'/teams')
 
 
 
-  const submitButton = document.querySelector("#submit-button");
+  const submitButton = document.getElementById("submit-button");
   submitButton.addEventListener('click',()=>{
-    const inputName = document.querySelector("#inputName").value;
-    const inputTeam = document.querySelector("#inputTeam").value;
+    const inputName = document.getElementById("inputName").value;
+    const inputTeam = document.getElementById("inputTeam").value;
 
-    fetch(`${apiUrl}`+'/submittals', {
+    fetch(`${apiUrl}'/predictions`, {
       method: "POST",
       body: JSON.stringify({
           name: inputName ,
@@ -83,25 +81,25 @@ fetch(`${ApiUrl}`+'/teams')
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
-      })
+    })
     .then(response=> response.json())
     .then(data=>
-      data.forEach(element=>{
+      data.forEach(element =>{
         
         var predicitionRow = document.createElement('div');
         predictionRow.classList.add("predictionRow");
 
         var name = document.createElement('div');
-        name.innerHTML = inputName;
+        name.innerHTML = `${inputName}`;
         predicitionRow.appendChild(name);
 
         var prediction = document.createElement('div');
-        prediction.innerHTML = inputTeam;
+        prediction.innerHTML = `${inputTeam}`;
         predicitionRow.appendChild(prediction);
 
         const predictionRowContainer = document.querySelector("#predictionRowContainer");
         predictionRowContainer.appendChild(predictionRow);
-      )
+      })
     )
     .catch(error => console.error('Error:', error)); 
  });

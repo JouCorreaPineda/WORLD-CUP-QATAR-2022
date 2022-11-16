@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { Client } = require('pg');
-// const { send } = require('process');
 
 const config = require('./config')[process.env.NODE_ENV||"dev"];
 const port = config.port;
+
 
 const client = new Client({
   connectionString: config.connectionStrings
@@ -58,7 +58,7 @@ app.get('/predictions',(req,res)=>{
   .catch(e=> console.error(e.stack));
 });
 
-app.post('/Submittals',(req,res)=>{
+app.post('/predictions',(req,res)=>{
   let predictions = req.body;
   let name = predictions.name;
   let team = predictions.team;
@@ -68,7 +68,7 @@ app.post('/Submittals',(req,res)=>{
   .catch(e=>{console.error(e.stack)});
 });
 
-app.delete('/:id', (req,res)=>{
+app.delete('/predictions/:id', (req,res)=>{
   client.query(`DELETE FROM predictions WHERE id=${req.params.id}`)
   .then(result=>{
     res.send(result.rows)})
@@ -76,8 +76,6 @@ app.delete('/:id', (req,res)=>{
     console.error(e.stack)
    })
 });
-
-
 
 app.listen(port,()=>{
   console.log(`listening on port: ${port}`)
