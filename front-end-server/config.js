@@ -1,15 +1,15 @@
-module.exports = {
-  dev:{
+// module.exports = {
+//   dev:{
 
-    apiURL: 'http://localhost:8000', 
-    port: 8000},
+//     apiURL: 'http://localhost:', 
+//     port: 8000},
 
-  production:{
+//   production:{
 
-    apiURL: process.env.API_URL, 
-    port:process.env.PORT}
-    
-}
+//     apiURL: process.env.API_URL, 
+//     port:process.env.PORT}
+
+// }
 
 //QUESTIONS:
 //can I name it whatever I want or does it have to be apiURL?

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { Client } = require('pg');
-const { json } = require('express');
+// const { json } = require('express');
 
 const config = require('./config')[process.env.NODE_ENV||"dev"];
 const port = config.port;
