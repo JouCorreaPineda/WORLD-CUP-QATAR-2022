@@ -60,11 +60,12 @@ app.get('/predictions',(req,res)=>{
 });
 
 app.post('/predictions',(req,res)=>{
+  console.log(req.body)
   let predictions = req.body;
   let name = predictions.name;
   let team = predictions.team;
 
-  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}")`)
+  client.query(`INSERT INTO predictions (name,team) VALUES ('${name}','${team}')`)
   .then(()=>{
     client.query(`SELECT * FROM predictions`)
     .then(result=>{

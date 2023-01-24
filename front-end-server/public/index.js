@@ -18,7 +18,7 @@ fetch(`${ApiUrl}`+'/venues')
   });
 });
 
-fetch(`${ApiUrl}`+'/firstMatches')
+fetch(`${ApiUrl}`+'/firstmatches')
 .then(response => response.json())
 .then(data => {
   const firstMatches = document.getElementById('matches');
@@ -44,41 +44,45 @@ fetch(`${ApiUrl}`+'/teams')
     });
 });
 
+document.addEventListener('DOMContentLoaded', function(){
+  const form = document.getElementById('submittals');
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    let Name = document.getElementById('inputName').value;
+    let Team = document.getElementById('inputTeam').value;
 
-var submitButton = document.getElementById('submit-button');
-submitButton.addEventListener('click',function(){
-  let Name = document.getElementById('inputName').value;
-  let Team = document.getElementById('inputTeam').value;
+    fetch('http://localhost:8000/predictions', {
+      method: 'POST',
+      body: JSON.stringify({
+        name:Name,
+        team:Team,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+      })
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(element=>{
+        let submittals = document.getElementById('submittals');
+        let userPrediction = document.createElement('div');
 
-  fetch(`${ApiUrl}`+'/predictions', {
-    method: 'POST',
-    body: JSON.stringify({
-      name:Name,
-      team:Team,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    }
+        let userName = document.createElement('div');
+            userName.innerHTML = element.name;
+            userPrediction.appendChild(userName);
+
+        let userTeam = document.createElement('div');
+            userTeam.innerHTML = element.team;
+            userPrediction.appendChild(userTeam);
+
+        submittals.appendChild(userPrediction);
+      })
     })
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(element=>{
-      let submittals = document.getElementById('submittals');
-      let userPrediction = document.createElement('div');
-
-      let userName = document.createElement('div');
-          userName.innerHTML = element.name;
-          userPrediction.appendChild(userName);
-
-      let userTeam = document.createElement('div');
-          userTeam.innerHTML = element.team;
-          userPrediction.appendChild(userTeam);
-
-      submittals.appendChild(userPrediction);
-    })
-  })
-  .catch(error => console.error('Error:', error)); ;
+    .catch(error => console.error('Error:', error)); ;
+  });
 });
+
+
 
 
 
