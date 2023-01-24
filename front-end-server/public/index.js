@@ -33,7 +33,7 @@ fetch(`${ApiUrl}`+'/firstmatches')
 
 fetch(`${ApiUrl}`+'/teams')
 .then(response => response.json())
-.then(data => {
+.then((data) => {
     const teams = document.getElementById('teams');
     teams.addEventListener('click',()=>{
       data.forEach(element=>{
@@ -43,6 +43,33 @@ fetch(`${ApiUrl}`+'/teams')
       });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+  fetch('http://localhost:8000/predictions')
+  .then(response => response.json())
+  .then((data) => {
+    console.log(data)
+    data.forEach(element=>{
+      let submittals = document.getElementById('submittals');
+      let userPrediction = document.createElement('div');
+      userPrediction.classList.add('predictionRow')
+
+      let userName = document.createElement('div');
+      userName.innerHTML = element.name;
+      userName.classList.add('prediction')
+      userPrediction.appendChild(userName);
+
+      let userTeam = document.createElement('div');
+      userTeam.innerHTML = element.team;
+      userTeam.classList.add('prediction')
+      userPrediction.appendChild(userTeam);
+
+      submittals.appendChild(userPrediction);
+    });
+  });
+});
+
 
 document.addEventListener('DOMContentLoaded', function(){
   const form = document.getElementById('submittals');
@@ -66,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function(){
       data.forEach(element=>{
         let submittals = document.getElementById('submittals');
         let userPrediction = document.createElement('div');
+        userPrediction.classList.add('predictionRow')
 
         let userName = document.createElement('div');
             userName.innerHTML = element.name;

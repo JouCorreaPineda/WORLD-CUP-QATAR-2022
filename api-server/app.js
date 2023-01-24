@@ -30,7 +30,7 @@ app.get('/',(req,res)=>{
 app.get('/firstmatches',(req,res)=>{
   client.query('SELECT * FROM firstMatches')
   .then(result=>{
-    res.send(JSON.stringify(result.rows));
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -38,7 +38,7 @@ app.get('/firstmatches',(req,res)=>{
 app.get('/teams',(req,res)=>{
   client.query('SELECT * FROM teams')
   .then(result=>{
-    res.send(JSON.stringify(result.rows));
+    res.json(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -46,7 +46,7 @@ app.get('/teams',(req,res)=>{
 app.get('/venues',(req,res)=>{
   client.query('SELECT * FROM venues')
   .then(result=>{
-    res.json(result.rows);
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -54,7 +54,7 @@ app.get('/venues',(req,res)=>{
 app.get('/predictions',(req,res)=>{
   client.query('SELECT * FROM predictions')
   .then(result=>{
-    res.send(JSON.stringify(result.rows));
+    res.send(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -69,7 +69,7 @@ app.post('/predictions',(req,res)=>{
   .then(()=>{
     client.query(`SELECT * FROM predictions`)
     .then(result=>{
-      res.send(result.rows)
+      res.json(result.rows)
     })
   })
   .catch(e=>{console.error(e.stack)});
