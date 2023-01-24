@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { Client } = require('pg');
+const { json } = require('express');
 
 const config = require('./config')[process.env.NODE_ENV||"dev"];
 const port = config.port;
@@ -29,7 +30,7 @@ app.get('/',(req,res)=>{
 app.get('/firstmatches',(req,res)=>{
   client.query('SELECT * FROM firstMatches')
   .then(result=>{
-    res.send(result.rows);
+    res.send(JSON.stringify(result.rows));
   })
   .catch(e=> console.error(e.stack));
 });
@@ -37,7 +38,7 @@ app.get('/firstmatches',(req,res)=>{
 app.get('/teams',(req,res)=>{
   client.query('SELECT * FROM teams')
   .then(result=>{
-    res.send(result.rows);
+    res.send(JSON.stringify(result.rows));
   })
   .catch(e=> console.error(e.stack));
 });
@@ -45,7 +46,7 @@ app.get('/teams',(req,res)=>{
 app.get('/venues',(req,res)=>{
   client.query('SELECT * FROM venues')
   .then(result=>{
-    res.send(result.rows);
+    res.json(result.rows);
   })
   .catch(e=> console.error(e.stack));
 });
@@ -53,7 +54,7 @@ app.get('/venues',(req,res)=>{
 app.get('/predictions',(req,res)=>{
   client.query('SELECT * FROM predictions')
   .then(result=>{
-    res.send(result.rows);
+    res.send(JSON.stringify(result.rows));
   })
   .catch(e=> console.error(e.stack));
 });
@@ -63,8 +64,13 @@ app.post('/predictions',(req,res)=>{
   let name = predictions.name;
   let team = predictions.team;
 
-  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}"`)
-  .then(result=>{res.send(predictions)})
+  client.query(`INSERT INTO predictions (name,team) VALUES ("${name}","${team}")`)
+  .then(()=>{
+    client.query(`SELECT * FROM predictions`)
+    .then(result=>{
+      res.send(result.rows)
+    })
+  })
   .catch(e=>{console.error(e.stack)});
 });
 
