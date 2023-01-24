@@ -1,9 +1,8 @@
-// const ENV = "production";
+const ENV = "production";
 // const ENV = "dev";
 
-// let ApiUrl = ENV == "dev" ? "http://localhost:8000" : "https://wc22-api-server.onrender.com";
+let ApiUrl = ENV == "dev" ? "http://localhost:8000" : "https://wc22-api-server.onrender.com";
 
-const ApiUrl = "http://localhost:8000"
 
 fetch(`${ApiUrl}`+'/venues')
 .then(response => response.json())
@@ -46,7 +45,7 @@ fetch(`${ApiUrl}`+'/teams')
 
 
 document.addEventListener('DOMContentLoaded',()=>{
-  fetch('http://localhost:8000/predictions')
+  fetch(`${ApiUrl}`+'/predictions')
   .then(response => response.json())
   .then((data) => {
     console.log(data)
