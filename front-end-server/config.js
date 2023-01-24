@@ -1,8 +1,14 @@
-module.export = {
-  dev:{apiURL: 'http://localhost:8000', 
+module.exports = {
+  dev:{
+
+    apiURL: 'http://localhost:8000', 
     port: 8000},
-  production:{apiURL: process.env.API_URL, 
+
+  production:{
+
+    apiURL: process.env.API_URL, 
     port:process.env.PORT}
+    
 }
 
 //QUESTIONS:
